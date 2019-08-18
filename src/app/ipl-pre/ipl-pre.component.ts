@@ -22,12 +22,12 @@ export class IplPreComponent implements OnInit {
   pickName:string;
   userName: string;
   constructor(private modalService: BsModalService, private router:Router, private teamService: TeamsService, private pickService:PickService){
-    setTimeout(()=>{
-    this.teams = teamService.teams;
+    setTimeout(()=>
+    this.teams = teamService.teams
+    , 400);
     for(let i = 0; i < 14; i++){
       this.chosenTeams.push(null);
-    }}
-    , 400);
+    }
   }
 
   ngOnInit() {
