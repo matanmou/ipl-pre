@@ -14,7 +14,7 @@ export class ShowPredictComponent implements OnInit {
   pickName:string;
   pickBy:string;
   constructor(private pickService:PickService, private route: ActivatedRoute) {
-    setTimeout(()=>{this.chosenTeams = this.pickService.pickedTeams;}, 200);
+    setTimeout(()=>{this.chosenTeams = this.pickService.pickedTeams;}, 400);
   }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class ShowPredictComponent implements OnInit {
       this.id = params['id'];
       this.pickService.getPick(this.id);
   });
-  setTimeout(()=>{this.getNames()}, 100);
+  setTimeout(()=>{this.getNames()}, 400);
   }
 
   getNames(){
