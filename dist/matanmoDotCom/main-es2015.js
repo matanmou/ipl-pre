@@ -74,7 +74,7 @@ module.exports = "<div class=\"container\">\n<div class=\"row\">\n\n  <table cla
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img class=\"logopic\" src=\"/assets/imgs/new_logo.png\" width=\"100\"/>"
+module.exports = "<img class=\"logopic\" src=\"/src/assets/imgs/new_logo.png\" width=\"100\"/>"
 
 /***/ }),
 
