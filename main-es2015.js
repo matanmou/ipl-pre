@@ -41,7 +41,7 @@ module.exports = "<div class=\"container\">\n    <!--<app-menu></app-menu>-->\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <span >MatanMo - נבנה על ידי מתן מויאל</span>\n</div>\n  "
+module.exports = "<div>\n  <span >MatanMo - מתן מויאל</span>\n</div>\n  "
 
 /***/ }),
 
@@ -140,7 +140,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n  \n    <tab
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-header\" dir=\"rtl\">\n  <h4 class=\"modal-title pull-left\">בחר קבוצה למקום ה-{{palce}}</h4>\n  <button type=\"button\" class=\"close pull-right cb\" aria-label=\"Close\" (click)=\"bsModalRef.hide()\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <div class=\"list-group\">\n    <ng-container  *ngFor=\"let team of teams\">\n    <button type=\"button\" *ngIf=\"alreadyChose(team)\" class=\"list-group-item list-group-item-action\" (click)=\"teamChose(team.id)\" [ngStyle]=\"setMyStyle(team)\"> {{team.teamName}}</button>\n    <button type=\"button\" *ngIf=\"!alreadyChose(team)\" class=\"list-group-item list-group-item-action chos\" (click)=\"teamChose(team.id)\"><span class=\"chosen\">{{team.teamName}}</span><span [style.content]=\"setCPlace(team)\"></span></button>\n  </ng-container>\n  </div>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-default cb\" (click)=\"bsModalRef.hide()\">סגור</button>\n</div>\n"
+module.exports = "<div class=\"modal-header\" dir=\"rtl\">\n  <h4 class=\"modal-title pull-left\">בחר קבוצה למקום ה-{{palce}}</h4>\n  <button type=\"button\" class=\"close pull-right cb\" aria-label=\"Close\" (click)=\"bsModalRef.hide()\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <div class=\"list-group\">\n    <ng-container  *ngFor=\"let team of teams\">\n    <button type=\"button\" *ngIf=\"alreadyChose(team)\" class=\"list-group-item list-group-item-action\" (click)=\"teamChose(team.id)\" [ngStyle]=\"setMyStyle(team)\"> {{team.teamName}}</button>\n    <button type=\"button\" *ngIf=\"!alreadyChose(team)\" class=\"list-group-item list-group-item-action chos\" (click)=\"teamChose(team.id)\"><span class=\"chosen\">{{team.teamName}}</span></button>\n  </ng-container>\n  </div>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-default cb\" (click)=\"bsModalRef.hide()\">סגור</button>\n</div>\n"
 
 /***/ }),
 
@@ -464,7 +464,7 @@ let IplPreComponent = class IplPreComponent {
         this.colors = "#3a7e3a";
         this.teams = [];
         this.chosenTeams = [];
-        setTimeout(() => this.teams = teamService.teams, 200);
+        setTimeout(() => this.teams = teamService.teams, 400);
         for (let i = 0; i < 14; i++) {
             this.chosenTeams.push(null);
         }
@@ -482,7 +482,6 @@ let IplPreComponent = class IplPreComponent {
         this.modalRef.content.pick.subscribe(result => {
             let indx = this.teams.findIndex(team => team.id == result);
             let delIndex = this.chosenTeams.findIndex(team => team != null && team.id == result);
-            console.log(this.teams);
             if (delIndex != -1)
                 this.chosenTeams[delIndex] = null;
             this.chosenTeams[placeC - 1] = {
@@ -492,7 +491,6 @@ let IplPreComponent = class IplPreComponent {
                 sColor: this.teams[indx].sColor,
                 chosenP: placeC
             };
-            console.log(this.chosenTeams);
         });
         this.modalRef.content.closeBtnName = 'סגור';
     }
@@ -799,14 +797,11 @@ let PickService = class PickService {
     postPick(pic) {
         this.http.post(this.api, pic).subscribe(data => {
             this.pickId = data.id;
-            console.log(data.id);
         });
-        console.log(this.pickId);
         return this.pickId;
     }
     getPick(id) {
         this.http.get(this.api + '/' + id).subscribe(p => {
-            console.log(p);
             this.pickToChose(p);
             this.pickBy = p.userName;
             this.pickName = p.name;
@@ -972,13 +967,6 @@ let TeamListComponent = class TeamListComponent {
             'font-size': "20px"
         };
         return styles;
-    }
-    setCPlace(tem) {
-        let cp = this.cTeam.find(t => t != null && t.id == tem.id);
-        let styles = {
-            'content': 'eef'
-        };
-        return "dsfsdf";
     }
 };
 TeamListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
