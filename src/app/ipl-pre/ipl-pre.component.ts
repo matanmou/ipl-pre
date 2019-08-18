@@ -24,7 +24,7 @@ export class IplPreComponent implements OnInit {
   constructor(private modalService: BsModalService, private router:Router, private teamService: TeamsService, private pickService:PickService){
     setTimeout(()=>
     this.teams = teamService.teams
-    , 200);
+    , 400);
     for(let i = 0; i < 14; i++){
       this.chosenTeams.push(null);
     }
@@ -46,7 +46,6 @@ export class IplPreComponent implements OnInit {
     this.modalRef.content.pick.subscribe(result => {
       let indx = this.teams.findIndex(team=> team.id == result);
       let delIndex = this.chosenTeams.findIndex(team => team != null && team.id == result);
-      console.log(this.teams);
       if(delIndex != -1)
         this.chosenTeams[delIndex] = null;
       this.chosenTeams[placeC-1] = {
@@ -56,7 +55,6 @@ export class IplPreComponent implements OnInit {
         sColor: this.teams[indx].sColor,
         chosenP: placeC
       }
-      console.log(this.chosenTeams);
     });
     this.modalRef.content.closeBtnName = 'סגור';
   }

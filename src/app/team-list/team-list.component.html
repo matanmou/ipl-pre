@@ -8,7 +8,7 @@
   <div class="list-group">
     <ng-container  *ngFor="let team of teams">
     <button type="button" *ngIf="alreadyChose(team)" class="list-group-item list-group-item-action" (click)="teamChose(team.id)" [ngStyle]="setMyStyle(team)"> {{team.teamName}}</button>
-    <button type="button" *ngIf="!alreadyChose(team)" class="list-group-item list-group-item-action chos" (click)="teamChose(team.id)"><span class="chosen">{{team.teamName}}</span><span [style.content]="setCPlace(team)"></span></button>
+    <button type="button" *ngIf="!alreadyChose(team)" class="list-group-item list-group-item-action chos" (click)="teamChose(team.id)"><span class="chosen">{{team.teamName}}</span></button>
   </ng-container>
   </div>
 </div>

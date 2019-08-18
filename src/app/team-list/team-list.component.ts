@@ -45,11 +45,4 @@ export class TeamListComponent implements OnInit {
     };
     return styles;
   }
-  setCPlace(tem:Team) {
-    let cp = this.cTeam.find(t => t != null && t.id == tem.id);
-    let styles = {
-      'content': 'eef'
-    };
-    return "dsfsdf";
-  }
 }

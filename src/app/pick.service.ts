@@ -25,15 +25,12 @@ export class PickService {
    postPick(pic:Pick):string{
      this.http.post<Pick>(this.api, pic).subscribe(data=>{
        this.pickId = data.id;
-       console.log(data.id);
      });
-     console.log(this.pickId);
      return this.pickId;
     }
 
     getPick(id:string){
       this.http.get<Pick>(this.api+'/'+id).subscribe(p=>{
-        console.log(p);
         this.pickToChose(p); 
         this.pickBy = p.userName;
         this.pickName = p.name;
