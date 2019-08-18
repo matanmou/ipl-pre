@@ -464,12 +464,10 @@ let IplPreComponent = class IplPreComponent {
         this.colors = "#3a7e3a";
         this.teams = [];
         this.chosenTeams = [];
-        setTimeout(() => {
-            this.teams = teamService.teams;
-            for (let i = 0; i < 14; i++) {
-                this.chosenTeams.push(null);
-            }
-        }, 400);
+        setTimeout(() => this.teams = teamService.teams, 400);
+        for (let i = 0; i < 14; i++) {
+            this.chosenTeams.push(null);
+        }
     }
     ngOnInit() {
         setTimeout(() => this.teams = this.teamService.teams, 200);

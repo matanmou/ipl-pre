@@ -477,11 +477,11 @@ var IplPreComponent = /** @class */ (function () {
         this.teams = [];
         this.chosenTeams = [];
         setTimeout(function () {
-            _this.teams = teamService.teams;
-            for (var i = 0; i < 14; i++) {
-                _this.chosenTeams.push(null);
-            }
+            return _this.teams = teamService.teams;
         }, 400);
+        for (var i = 0; i < 14; i++) {
+            this.chosenTeams.push(null);
+        }
     }
     IplPreComponent.prototype.ngOnInit = function () {
         var _this = this;
