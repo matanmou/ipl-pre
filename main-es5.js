@@ -74,7 +74,7 @@ module.exports = "<div class=\"container\">\n<div class=\"row\">\n\n  <table cla
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img class=\"logopic\" src=\"/src/assets/imgs/new_logo.png\" width=\"100\"/>"
+module.exports = "<div class=\"logopic\"></div>"
 
 /***/ }),
 
@@ -586,7 +586,7 @@ var IplPreComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".logopic{\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    width: 35%;\r\n    margin-bottom: 0.5em;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9nby1vbmx5L2xvZ28tb25seS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksY0FBYztJQUNkLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsVUFBVTtJQUNWLG9CQUFvQjtBQUN4QiIsImZpbGUiOiJzcmMvYXBwL2xvZ28tb25seS9sb2dvLW9ubHkuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5sb2dvcGlje1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBtYXJnaW4tbGVmdDogYXV0bztcclxuICAgIG1hcmdpbi1yaWdodDogYXV0bztcclxuICAgIHdpZHRoOiAzNSU7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwLjVlbTtcclxufSJdfQ== */"
+module.exports = ".logopic{\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    width: 35%;\r\n    margin-bottom: 0.5em;\r\n    content: url('new_logo.png');\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9nby1vbmx5L2xvZ28tb25seS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksY0FBYztJQUNkLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsVUFBVTtJQUNWLG9CQUFvQjtJQUNwQiw0QkFBOEM7QUFDbEQiLCJmaWxlIjoic3JjL2FwcC9sb2dvLW9ubHkvbG9nby1vbmx5LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9nb3BpY3tcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbiAgICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbiAgICB3aWR0aDogMzUlO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMC41ZW07XHJcbiAgICBjb250ZW50OiB1cmwoXCIuLi8uLi9hc3NldHMvaW1ncy9uZXdfbG9nby5wbmdcIik7XHJcbn0iXX0= */"
 
 /***/ }),
 
