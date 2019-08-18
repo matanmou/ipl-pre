@@ -1,5 +1,6 @@
 <div class="container">
 <div class="row">
+
   <table class="table table-dark">
     <thead>
       <tr>
@@ -32,7 +33,7 @@
             'border-color': team.sColor
           }"
           >
-          
+  
         </span>
       </td>
       <td *ngIf="team != null">
@@ -41,5 +42,18 @@
     </tr>
   </tbody>
 </table>
+<div class="coteret">
+  <h1>ניחוש טבלת ליגת העל לעונת 2019 / 2020</h1>
+  <div class="txt">
+    אתם מוזמנים לנחש ולבחור איך לדעתכם תיראה טבלת ליגת העל בכדורגל לעונת 2019/2020
+    <br />
+
+  שם:
+  <input class="form-control" id="name"/>
+  נבחר ע"י:
+  <input class="form-control" id="pickBy"/>
+  <button type="button" class="btn btn-primary" (click)="submitPick()">שמירה</button>
+  </div>
+</div>
 </div>
 </div>

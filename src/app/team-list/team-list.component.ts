@@ -34,4 +34,22 @@ export class TeamListComponent implements OnInit {
     this.pick.next(id);
     this.bsModalRef.hide();
   }
+
+  setMyStyle(tem:Team) {
+    let styles = {
+     'background-image': 'linear-gradient(to left, white, '+tem.pColor+','+tem.sColor+')',
+     'background-repeat': 'no-repeat',
+     'background-size':"50%",
+      //'color':tem.sColor,
+      'font-size': "20px"
+    };
+    return styles;
+  }
+  setCPlace(tem:Team) {
+    let cp = this.cTeam.find(t => t != null && t.id == tem.id);
+    let styles = {
+      'content': 'eef'
+    };
+    return "dsfsdf";
+  }
 }

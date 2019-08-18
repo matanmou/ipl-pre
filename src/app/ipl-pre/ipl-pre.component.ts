@@ -3,39 +3,38 @@ import { Team } from '../models/team';
 import { ChosenTeam } from '../models/chosen-team';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { TeamListComponent } from '../team-list/team-list.component';
-import { delay } from 'q';
+import { TeamsService } from '../teams.service';
+import { debug, isNull } from 'util';
+import { Pick } from '../models/pick';
+import { PickService } from '../pick.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ipl-pre',
   templateUrl: './ipl-pre.component.html',
   styleUrls: ['./ipl-pre.component.css']
 })
-export class IplPreComponent {
+export class IplPreComponent implements OnInit {
   colors:string = "#3a7e3a";
   teams: Team[] = [];
-  chosenTeams: Team[] = [];
+  chosenTeams: ChosenTeam[] = [];
   modalRef: BsModalRef;
-  try: string = "#ffffff";
-  constructor(private modalService: BsModalService){
-    this.teams.push({id: 1, teamName: "מכבי חיפה", lastYearStand: 2, pColor: "green", sColor: "white", chosenP: 0});
-    this.teams.push({id: 2, teamName: "מכבי תל אביב", lastYearStand: 1, pColor: "yellow", sColor: "blue", chosenP: 0});
-    this.teams.push({id: 3, teamName: "הפועל באר שבע", lastYearStand: 3, pColor: "red", sColor: "white", chosenP: 0});
-    this.teams.push({id: 4, teamName: "מכבי נתניה", lastYearStand: 4, pColor: "yellow", sColor: "black", chosenP: 0});
-    this.teams.push({id: 5, teamName: "בני יהודה", lastYearStand: 5, pColor: "orange", sColor: "black", chosenP: 0});
-    this.teams.push({id: 6, teamName: "הפועל חדרה", lastYearStand: 6, pColor: "red", sColor: "white", chosenP: 0});
-    this.teams.push({id: 7, teamName: "בית\"ר ירושלים", lastYearStand: 7, pColor: "yellow", sColor: "black", chosenP: 0});
-    this.teams.push({id: 8, teamName: "הפועל תל אביב", lastYearStand: 8, pColor: "red", sColor: "white", chosenP: 0});
-    this.teams.push({id: 9, teamName: "הפועל רעננה", lastYearStand: 9, pColor: "red", sColor: "black", chosenP: 0});
-    this.teams.push({id: 10, teamName: "עירוני קרית שמונה", lastYearStand: 10, pColor: "white", sColor: "blue", chosenP: 0});
-    this.teams.push({id: 11, teamName: "מ.ס. אשדוד", lastYearStand: 11, pColor: "red", sColor: "yellow", chosenP: 0});
-    this.teams.push({id: 12, teamName: "הפועל חיפה", lastYearStand: 12, pColor: "red", sColor: "black", chosenP: 0});
-    this.teams.push({id: 13, teamName: "סקציה נס ציונה", lastYearStand: -1, pColor: "orange", sColor: "white", chosenP: 0});
-    this.teams.push({id: 14, teamName: "הפועל כפר סבא", lastYearStand: -1, pColor: "green", sColor: "white", chosenP: 0});
-
+  pickName:string;
+  userName: string;
+  constructor(private modalService: BsModalService, private router:Router, private teamService: TeamsService, private pickService:PickService){
+    setTimeout(()=>
+    this.teams = teamService.teams
+    , 200);
     for(let i = 0; i < 14; i++){
       this.chosenTeams.push(null);
     }
     
+  }
+
+  ngOnInit() {
+    setTimeout(()=>
+    this.teams = this.teamService.teams
+    , 200);
   }
   openModal(template: TemplateRef<any>, placeC: number) {
     const initialState = {
@@ -47,13 +46,58 @@ export class IplPreComponent {
     this.modalRef.content.pick.subscribe(result => {
       let indx = this.teams.findIndex(team=> team.id == result);
       let delIndex = this.chosenTeams.findIndex(team => team != null && team.id == result);
-      console.log("trhe "+delIndex);
+      console.log(this.teams);
       if(delIndex != -1)
         this.chosenTeams[delIndex] = null;
-      this.chosenTeams[placeC-1] = this.teams[indx];
-      this.chosenTeams[placeC-1].chosenP = placeC;
+      this.chosenTeams[placeC-1] = {
+        id: this.teams[indx].id,
+        teamName: this.teams[indx].teamName,
+        pColor: this.teams[indx].pColor,
+        sColor: this.teams[indx].sColor,
+        chosenP: placeC
+      }
       console.log(this.chosenTeams);
     });
     this.modalRef.content.closeBtnName = 'סגור';
+  }
+
+  submitPick(){
+    if(this.emptyArry(this.chosenTeams) == 0)
+      return alert("אנה בחר לפחות קבוצה אחת");
+    this.pickName = (<HTMLInputElement>document.getElementById('name')).value;
+    this.userName = (<HTMLInputElement>document.getElementById('pickBy')).value;
+    let pick:Pick = {
+      id: null,
+      name: this.pickName == '' ? 'ניחוש טבלת 2019/2020' : this.pickName,
+      userName: this.userName == '' ? 'אנונימי' : this.userName, 
+      date: null,
+      p1: isNull(this.chosenTeams[0]) ? 0:this.chosenTeams[0].id,
+      p2: isNull(this.chosenTeams[1]) ? 0:this.chosenTeams[1].id,
+      p3: isNull(this.chosenTeams[2]) ? 0:this.chosenTeams[2].id,
+      p4: isNull(this.chosenTeams[3]) ? 0:this.chosenTeams[3].id,
+      p5: isNull(this.chosenTeams[4]) ? 0:this.chosenTeams[4].id,
+      p6: isNull(this.chosenTeams[5]) ? 0:this.chosenTeams[5].id,
+      p7: isNull(this.chosenTeams[6]) ? 0:this.chosenTeams[6].id,
+      p8: isNull(this.chosenTeams[7]) ? 0:this.chosenTeams[7].id,
+      p9: isNull(this.chosenTeams[8]) ? 0:this.chosenTeams[8].id,
+      p10: isNull(this.chosenTeams[9]) ? 0:this.chosenTeams[9].id,
+      p11: isNull(this.chosenTeams[10]) ? 0:this.chosenTeams[10].id,
+      p12: isNull(this.chosenTeams[11]) ? 0:this.chosenTeams[11].id,
+      p13: isNull(this.chosenTeams[12]) ? 0:this.chosenTeams[12].id,
+      p14: isNull(this.chosenTeams[13]) ? 0:this.chosenTeams[13].id
+    };
+    this.pickService.postPick(pick);
+      setTimeout(()=>{
+        let id = this.pickService.pickId;
+        this.router.navigate([`/show`], { queryParams: {id: id}});;}, 400);
+  }
+
+  emptyArry(arr):number{
+    let cnt = 0;
+    for(let item of arr){
+      if(!isNull(item))
+        cnt++;
+    }
+    return cnt;
   }
 }

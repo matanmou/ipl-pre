@@ -12,6 +12,14 @@ import { BottomComponent } from './bottom/bottom.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { LogoOnlyComponent } from './logo-only/logo-only.component';
+import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { TeamsService } from './teams.service';
+import { PickService } from './pick.service';
+import { ShowPredictComponent } from './show-predict/show-predict.component';
+import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundTBComponent } from './not-found-tb/not-found-tb.component';
 
 
 @NgModule({
@@ -23,17 +31,26 @@ import { LogoOnlyComponent } from './logo-only/logo-only.component';
     NewsComponent,
     BottomComponent,
     TeamListComponent,
-    LogoOnlyComponent
+    LogoOnlyComponent,
+    ShowPredictComponent,
+    NotFoundComponent,
+    NotFoundTBComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     DragDropModule,
-    ModalModule.forRoot()
-  ],
+    FormsModule,
+    ModalModule.forRoot(),
+    HttpClientModule
+    ],
   entryComponents:[TeamListComponent],
-  providers: [],
+  providers: [
+    TeamsService,
+    PickService,
+    { provide: 'dbUrl', useValue: environment.webAPI }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
