@@ -887,14 +887,14 @@ let ShowPredictComponent = class ShowPredictComponent {
     constructor(pickService, route) {
         this.pickService = pickService;
         this.route = route;
-        setTimeout(() => { this.chosenTeams = this.pickService.pickedTeams; }, 200);
+        setTimeout(() => { this.chosenTeams = this.pickService.pickedTeams; }, 400);
     }
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
             this.id = params['id'];
             this.pickService.getPick(this.id);
         });
-        setTimeout(() => { this.getNames(); }, 100);
+        setTimeout(() => { this.getNames(); }, 400);
     }
     getNames() {
         this.pickName = this.pickService.pickName;

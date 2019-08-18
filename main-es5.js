@@ -936,7 +936,7 @@ var ShowPredictComponent = /** @class */ (function () {
         var _this = this;
         this.pickService = pickService;
         this.route = route;
-        setTimeout(function () { _this.chosenTeams = _this.pickService.pickedTeams; }, 200);
+        setTimeout(function () { _this.chosenTeams = _this.pickService.pickedTeams; }, 400);
     }
     ShowPredictComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -944,7 +944,7 @@ var ShowPredictComponent = /** @class */ (function () {
             _this.id = params['id'];
             _this.pickService.getPick(_this.id);
         });
-        setTimeout(function () { _this.getNames(); }, 100);
+        setTimeout(function () { _this.getNames(); }, 400);
     };
     ShowPredictComponent.prototype.getNames = function () {
         this.pickName = this.pickService.pickName;
