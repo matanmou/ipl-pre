@@ -52,7 +52,11 @@
   <input class="form-control" id="name"/>
   נוחש ע"י:
   <input class="form-control" id="pickBy"/>
-  <button type="button" class="btn btn-primary" (click)="submitPick()">שמירה</button>
+  <button type="button" *ngIf="this.load == false" class="btn btn-primary" (click)="submitPick()">שמירה</button>
+  <button class="btn btn-primary" *ngIf="this.load == true" type="button">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    טוען...
+  </button>
   </div>
 </div>
 </div>

@@ -6,3 +6,7 @@
     margin-bottom: 0.5em;
     content: url("../../assets/imgs/new_logo.png");
 }
+
+div:hover{
+    cursor: pointer;
+}

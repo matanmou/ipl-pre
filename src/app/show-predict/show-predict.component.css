@@ -143,3 +143,11 @@ table {
   border: #00265f;
   margin-top: 10px;
 }
+
+a{
+  color: white;
+}
+
+a:hover{
+  color: gray;
+}

@@ -21,6 +21,7 @@ export class IplPreComponent implements OnInit {
   modalRef: BsModalRef;
   pickName:string;
   userName: string;
+  load:boolean = false;
   constructor(private modalService: BsModalService, private router:Router, private teamService: TeamsService, private pickService:PickService){
     setTimeout(()=>
     this.teams = teamService.teams
@@ -31,9 +32,6 @@ export class IplPreComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(()=>
-    this.teams = this.teamService.teams
-    , 200);
   }
   openModal(template: TemplateRef<any>, placeC: number) {
     const initialState = {
@@ -60,7 +58,7 @@ export class IplPreComponent implements OnInit {
 
   submitPick(){
     if(this.emptyArry(this.chosenTeams) == 0)
-      return alert("אנה בחר לפחות קבוצה אחת");
+      return alert("אנא בחר לפחות קבוצה אחת");
     this.pickName = (<HTMLInputElement>document.getElementById('name')).value;
     this.userName = (<HTMLInputElement>document.getElementById('pickBy')).value;
     let pick:Pick = {
@@ -83,10 +81,12 @@ export class IplPreComponent implements OnInit {
       p13: isNull(this.chosenTeams[12]) ? 0:this.chosenTeams[12].id,
       p14: isNull(this.chosenTeams[13]) ? 0:this.chosenTeams[13].id
     };
+    this.load = true;
     this.pickService.postPick(pick);
       setTimeout(()=>{
         let id = this.pickService.pickId;
-        this.router.navigate([`/show`], { queryParams: {id: id}});;}, 400);
+        this.router.navigate([`/show`], { queryParams: {id: id}});
+        this.load = false;}, 1000);
   }
 
   emptyArry(arr):number{
