@@ -120,6 +120,10 @@ table {
           margin: auto;
         width: 100%; }
         table { order: 2;  }
+        a{
+          margin: auto;
+          width: 50%;
+        }
     
     }
     

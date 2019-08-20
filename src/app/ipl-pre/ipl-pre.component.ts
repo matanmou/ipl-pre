@@ -23,9 +23,7 @@ export class IplPreComponent implements OnInit {
   userName: string;
   load:boolean = false;
   constructor(private modalService: BsModalService, private router:Router, private teamService: TeamsService, private pickService:PickService){
-    setTimeout(()=>
-    this.teams = teamService.teams
-    , 400);
+
     for(let i = 0; i < 14; i++){
       this.chosenTeams.push(null);
     }
@@ -34,6 +32,9 @@ export class IplPreComponent implements OnInit {
   ngOnInit() {
   }
   openModal(template: TemplateRef<any>, placeC: number) {
+    do{
+      this.teams = this.teamService.teams;
+    }while(isNull(this.teams[0]));
     const initialState = {
       teams: this.teams,
       palce: placeC,

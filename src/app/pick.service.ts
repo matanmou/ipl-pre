@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, VirtualTimeScheduler } from 'rxjs';
 import { Pick } from './models/pick';
 import { ChosenTeam } from './models/chosen-team';
 import { TeamsService } from './teams.service';
@@ -14,12 +14,16 @@ export class PickService {
   pick:Pick;
   api:string;
   pickedTeams:ChosenTeam[] = [];
-  pickName:string = '';
-  pickBy:string = '';
+  pgTeams:Subject<ChosenTeam[]>;
+  pickName:Subject<string>;
+  pickBy:Subject<string>;
   pickId:string = '';
 
   constructor(private http:HttpClient, private router:Router ,private teamService: TeamsService, @Inject('dbUrl')api:string) {
     this.api = api+'/picks';
+    this.pickBy = new Subject();
+    this.pickName = new Subject();
+    this.pgTeams = new Subject();
    }
 
    postPick(pic:Pick):string{
@@ -31,9 +35,10 @@ export class PickService {
 
     getPick(id:string){
       this.http.get<Pick>(this.api+'/'+id).subscribe(p=>{
-        this.pickToChose(p); 
-        this.pickBy = p.userName;
-        this.pickName = p.name;
+        this.pickToChose(p);
+        this.pgTeams.next(this.pickedTeams);
+        this.pickBy.next(p.userName);
+        this.pickName.next(p.name);
       }, err=> this.errorHandel(err,id));
 
     }
@@ -42,7 +47,10 @@ export class PickService {
       for(let i:number = 0; i<14; i++){
         let pl:string = "p"+(i+1);
         if(p[pl] > 0){
-          let team:Team = this.teamService.teams.find(t=> t.id == p[pl]);
+          let indx:number;
+          indx = this.teamService.teams.findIndex(t=> 
+            t.id == p[pl]);
+          let team = this.teamService.teams[indx];
           this.pickedTeams[i] = {
             id: team.id,
             teamName: team.teamName,

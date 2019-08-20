@@ -14,20 +14,21 @@ export class ShowPredictComponent implements OnInit {
   pickName:string;
   pickBy:string;
   constructor(private pickService:PickService, private route: ActivatedRoute) {
-    setTimeout(()=>{this.chosenTeams = this.pickService.pickedTeams;}, 400);
+    this.pickService.pgTeams.subscribe(c=> {this.chosenTeams = c});
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.id = params['id'];
-      this.pickService.getPick(this.id);
+      setTimeout(()=>
+      {this.pickService.getPick(this.id);},400);
   });
   setTimeout(()=>{this.getNames()}, 400);
   }
 
   getNames(){
-    this.pickName = this.pickService.pickName;
-    this.pickBy = this.pickService.pickBy;
+    this.pickService.pickName.subscribe(p => {this.pickName = p;});
+    this.pickService.pickBy.subscribe(p=> {this.pickBy = p;});
   }
 
 }
