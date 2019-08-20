@@ -129,7 +129,7 @@ module.exports = "<h1>404<br />תוכן מבוקש אינו נמצא</h1>\n<h1><
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n  \n    <table class=\"table table-dark\">\n      <thead>\n        <tr>\n          <th scope=\"col\" class=\"mikum\">מיקום</th>\n          <th scope=\"col\" colspan=\"2\">קבוצה</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let team of chosenTeams; let i = index\">\n          <th scope=\"row\" class=\"mikum\">{{ i + 1 }}</th>\n          <td class=\"teamPos\" *ngIf=\"team == null\">\n            <img\n            class=\"addSign\"\n            src=\"assets/imgs/addBut21blank.png\"\n            alt=\"לא נבחרה קבוצה\"\n            width=\"30px\"\n            height=\"30px\"\n            />\n          </td>\n          <td *ngIf=\"team == null\" class=\"rfe\">\n            לא נבחרה קבוצה\n          </td>\n          <td class=\"teamPos\" *ngIf=\"team != null\">\n            <span\n            class=\"egul\"\n            [ngStyle]=\"{\n              'background-color': team.pColor,\n              'border-color': team.sColor\n            }\"\n            >\n            \n          </span>\n        </td>\n        <td *ngIf=\"team != null\">\n          <span class=\"teamNames\">{{ team.teamName }} </span>\n        </td>\n      </tr>\n    </tbody>\n  </table><div class=\"coteret\">\n    <h1>ניחוש טבלת ליגת העל לעונת 2019 / 2020</h1>\n    <div class=\"txt\">\n       טבלת ליגת העל בכדורגל לעונת 2019/2020\n      <br />\n  \n    שם ניחוש:\n    <input class=\"form-control\" type=\"text\" id=\"name\" [(ngModel)]=\"this.pickName\" disabled/>\n    נוחש ע\"י:\n    <input class=\"form-control\" id=\"pickBy\" [(ngModel)]=\"this.pickBy\" disabled/>\n\n       </div>\n    קישור לטבלה:\n    <br />\n    <a href='/show?id={{this.id}}'>https://matanmou.github.io/iplTBpredict/show?id={{this.id}}</a><br />\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]='[\"/\"]'>ליצירת טבלה חדשה</button>\n\n    </div>\n  </div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n  \n    <table class=\"table table-dark\">\n      <thead>\n        <tr>\n          <th scope=\"col\" class=\"mikum\">מיקום</th>\n          <th scope=\"col\" colspan=\"2\">קבוצה</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let team of chosenTeams; let i = index\">\n          <th scope=\"row\" class=\"mikum\">{{ i + 1 }}</th>\n          <td class=\"teamPos\" *ngIf=\"team == null\">\n            <img\n            class=\"addSign\"\n            src=\"assets/imgs/addBut21blank.png\"\n            alt=\"לא נבחרה קבוצה\"\n            width=\"30px\"\n            height=\"30px\"\n            />\n          </td>\n          <td *ngIf=\"team == null\" class=\"rfe\">\n            לא נבחרה קבוצה\n          </td>\n          <td class=\"teamPos\" *ngIf=\"team != null\">\n            <span\n            class=\"egul\"\n            [ngStyle]=\"{\n              'background-color': team.pColor,\n              'border-color': team.sColor\n            }\"\n            >\n            \n          </span>\n        </td>\n        <td *ngIf=\"team != null\">\n          <span class=\"teamNames\">{{ team.teamName }} </span>\n        </td>\n      </tr>\n    </tbody>\n  </table><div class=\"coteret\">\n    <h1>ניחוש טבלת ליגת העל לעונת 2019 / 2020</h1>\n    <div class=\"txt\">\n       טבלת ליגת העל בכדורגל לעונת 2019/2020\n      <br />\n  \n    שם ניחוש:\n    <input class=\"form-control\" type=\"text\" id=\"name\" [(ngModel)]=\"this.pickName\" disabled/>\n    נוחש ע\"י:\n    <input class=\"form-control\" id=\"pickBy\" [(ngModel)]=\"this.pickBy\" disabled/>\n    בתאריך:<br />\n    {{this.pickDate}}\n       </div>\n    קישור לטבלה:\n    <br />\n    <a href='/show?id={{this.id}}'>https://matanmou.github.io/iplTBpredict/show?id={{this.id}}</a><br />\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]='[\"/\"]'>ליצירת טבלה חדשה</button>\n\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -833,6 +833,7 @@ var PickService = /** @class */ (function () {
         this.api = api + '/picks';
         this.pickBy = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.pickName = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.pickDate = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.pgTeams = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     PickService.prototype.postPick = function (pic) {
@@ -848,6 +849,7 @@ var PickService = /** @class */ (function () {
             _this.pickToChose(p);
             _this.pgTeams.next(_this.pickedTeams);
             _this.pickBy.next(p.userName);
+            _this.pickDate.next(p.date);
             _this.pickName.next(p.name);
         }, function (err) { return _this.errorHandel(err, id); });
     };
@@ -955,6 +957,7 @@ var ShowPredictComponent = /** @class */ (function () {
         var _this = this;
         this.pickService.pickName.subscribe(function (p) { _this.pickName = p; });
         this.pickService.pickBy.subscribe(function (p) { _this.pickBy = p; });
+        this.pickService.pickDate.subscribe(function (p) { _this.pickDate = p; });
     };
     ShowPredictComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
