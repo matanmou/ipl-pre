@@ -598,8 +598,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\matanmo\desktop\matanmo\matanmodotcom\src\styles.css */"./src/styles.css");
-module.exports = __webpack_require__(/*! C:\Users\matanmo\desktop\matanmo\matanmodotcom\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! C:\Users\matanmo\desktop\matanmo\matanmoDotCom\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! C:\Users\matanmo\desktop\matanmo\matanmoDotCom\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 
 /***/ })

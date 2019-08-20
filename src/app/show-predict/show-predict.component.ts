@@ -13,6 +13,7 @@ export class ShowPredictComponent implements OnInit {
   id:string;
   pickName:string;
   pickBy:string;
+  pickDate:string;
   constructor(private pickService:PickService, private route: ActivatedRoute) {
     this.pickService.pgTeams.subscribe(c=> {this.chosenTeams = c});
   }
@@ -29,6 +30,7 @@ export class ShowPredictComponent implements OnInit {
   getNames(){
     this.pickService.pickName.subscribe(p => {this.pickName = p;});
     this.pickService.pickBy.subscribe(p=> {this.pickBy = p;});
+    this.pickService.pickDate.subscribe(p=> {this.pickDate = p;});
   }
 
 }

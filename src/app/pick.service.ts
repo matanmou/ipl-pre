@@ -18,11 +18,13 @@ export class PickService {
   pickName:Subject<string>;
   pickBy:Subject<string>;
   pickId:string = '';
+  pickDate:Subject<string>;
 
   constructor(private http:HttpClient, private router:Router ,private teamService: TeamsService, @Inject('dbUrl')api:string) {
     this.api = api+'/picks';
     this.pickBy = new Subject();
     this.pickName = new Subject();
+    this.pickDate = new Subject();
     this.pgTeams = new Subject();
    }
 
@@ -38,6 +40,7 @@ export class PickService {
         this.pickToChose(p);
         this.pgTeams.next(this.pickedTeams);
         this.pickBy.next(p.userName);
+        this.pickDate.next(p.date);
         this.pickName.next(p.name);
       }, err=> this.errorHandel(err,id));
 
